@@ -97,5 +97,23 @@ describe("UserTableContainer", () => {
     expect(queryByText("Looks like there are no users!"));
     expect(queryByText(mockUser1.name)).toBeNull();
   });
-  it.todo("Should display error state when get users fails");
+  it("Should display error state when get users fails", async () => {
+    const mockUser1 = getMockUser();
+    getUserMock
+      .mockRejectedValueOnce(new Error("Woops"))
+      .mockResolvedValueOnce([mockUser1]);
+
+    const { queryByText, user, getByText } = setup(<UserTableContainer />);
+
+    expect(getUserMock).toHaveBeenCalledTimes(1);
+    await waitFor(() => {
+      expect(queryByText("An error occurred loading the users :(")).not.toBeNull();
+    });
+    expect(queryByText(mockUser1.name)).toBeNull();
+
+    await user.click(getByText("Get users"));
+
+    await waitFor(() => expect(queryByText(mockUser1.name)).not.toBeNull());
+    expect(queryByText("An error occurred loading the users")).toBeNull();
+  });
 });

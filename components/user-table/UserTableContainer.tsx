@@ -11,7 +11,7 @@ type UserTableContainerProps = {};
 
 export const UserTableContainer: React.FC<UserTableContainerProps> = ({}) => {
   const [users, setUsers] = useState<RequestState<User[]>>({
-    isLoading: false,
+    isLoading: true,
     data: [],
   });
 
@@ -83,7 +83,12 @@ export const UserTableContainer: React.FC<UserTableContainerProps> = ({}) => {
 
   if (users.error) {
     // TODO: handle error state some way
-    return null;
+    return (
+      <div className="flex justify-center items-center flex-col w-full h-full gap-4">
+        <p className="text-black">An error occurred loading the users :(</p>
+        <Button text="Get users" action="info" onClick={handleGetUsersClick} />
+      </div>
+    );
   }
 
   return (
