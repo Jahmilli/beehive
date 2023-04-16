@@ -1,11 +1,11 @@
 import { getUsers } from "@/api/users";
 import { User } from "@/interfaces/users";
 import { RequestState } from "@/interfaces/util";
-import { ReactNode, useEffect, useState } from "react";
-import { LoadingIcon } from "../LoadingIcon";
-import { Button } from "../Button";
-import { UserTable } from "./UserTable";
+import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { Button } from "../Button";
+import { LoadingIcon } from "../LoadingIcon";
+import { UserTable } from "./UserTable";
 
 type UserTableContainerProps = {};
 
@@ -76,7 +76,7 @@ export const UserTableContainer: React.FC<UserTableContainerProps> = ({}) => {
   if (users.isLoading) {
     return (
       <div className="flex justify-center items-center w-full h-full">
-        <LoadingIcon />;
+        <LoadingIcon />
       </div>
     );
   }

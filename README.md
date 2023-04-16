@@ -12,6 +12,7 @@ To run development server, run `pnpm dev`
 
 To test, run: `pnpm test`
 
+Can access live url at https://beehive-ten.vercel.app/
 
 ## Notes:
 
